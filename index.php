@@ -16,7 +16,7 @@
 	</head>
 	<body>
 <?php
-
+session_start();
 
 try
 {
@@ -94,9 +94,10 @@ catch(Exception $e)
 							<section>
 								<ul class="links">
 									<li>
-										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
+										<a href="#">';
+										echo '<h3>'.$_SESSION['nom'].'</h3>
+											<p>Afficher votre profil</p> ';
+										echo'	
 										</a>
 									</li>
 								</ul>
@@ -105,7 +106,14 @@ catch(Exception $e)
 						<!-- Actions -->
 							<section>
 								<ul class="actions vertical">
-									<li><a href="connexion.php" class="button big fit">Connexion</a></li>
+									';
+									if (isset($_SESSION['nom'])) {
+										echo'<li><a href="deconnexion.php" class="button big fit">Déconnexion</a></li>';
+									}
+									else {
+										echo'<li><a href="connexion.php" class="button big fit">Connexion</a></li>';
+									}
+								echo'		
 								</ul>
 							</section>
 
