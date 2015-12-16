@@ -24,9 +24,9 @@
 				<section class="form">
 					<form method="post" action="connexionTraite.php">
 						<label for="pseudo"> Nom : </label>
-						<input type="text">
+						<input type="text" name="nom">
 						<label for="pseudo"> Mot de passe : </label>
-						<input type="password">
+						<input type="password" name="mdp">
 						<input type="submit" value="Envoyer" />
 					</form>
 				</section>
