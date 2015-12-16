@@ -104,7 +104,7 @@ catch(Exception $e)
 							<section>
 								<ul class="links">
 									<li>
-										<a href="#">';
+										<a href="profil.php">';
 										echo '<h3>'.$_SESSION['nom'].'</h3>
 											<p>Afficher votre profil</p> ';
 										echo'	
