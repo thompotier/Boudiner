@@ -61,7 +61,17 @@ catch(Exception $e)
 						<h1><a href="#">Loc Advisor</a></h1>
 						<nav class="links">
 							<ul>
-								<li><a href="#">Accueil</a></li>
+								<li><a href="#">Accueil</a>';
+								//si le connceté est perseonnel
+								if (isset($_SESSION['droit']) && $_SESSION['droit']='3') {
+										echo'<li><a href="gesappart.php">Gérer appartement</a></li>
+											<li><a href="gesentretien.php">Gérer les entretiens</a></li>
+											<li><a href="ajappart.php">Ajouter un appartement</a></li>
+											<li><a href="gesoption.php">Valider les options</a></li>
+											<li><a href="geslocation.php">Demande de location</a></li>
+										';
+									}
+								echo'</li>
 								
 							</ul>
 						</nav>

@@ -1,0 +1,13 @@
+<?php
+// On dŽmarre la session
+session_start ();
+
+// On dŽtruit les variables de notre session
+session_unset ();
+
+// On dŽtruit notre session
+session_destroy ();
+
+// On redirige le visiteur vers la page d'accueil
+header ('location: index.php');
+?>
