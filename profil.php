@@ -23,7 +23,7 @@ session_start();
 								<li><a href="#">Accueil</a></li>
                                 <?php
 								//si le connceté est perseonnel
-								if (isset($_SESSION['droit']) && $_SESSION['droit']='3') {
+								if (isset($_SESSION['droit']) && $_SESSION['droit']=='3') {
 										echo'<li><a href="gesappart.php">Gérer appartement</a></li>
 											<li><a href="gesentretien.php">Gérer les entretiens</a></li>
 											<li><a href="ajappart.php">Ajouter un appartement</a></li>

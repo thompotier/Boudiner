@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo 'Id de l utilisateur : ' .$_SESSION['idutil']. '';
 ?>
 <html>
 	<head>
@@ -22,17 +21,6 @@ echo 'Id de l utilisateur : ' .$_SESSION['idutil']. '';
 						<nav class="links">
 							<ul>
 								<li><a href="#">Accueil</a></li>
-                                <?php
-								//si le connceté est perseonnel
-								if (isset($_SESSION['droit']) && $_SESSION['droit']='3') {
-										echo'<li><a href="gesappart.php">Gérer appartement</a></li>
-											<li><a href="gesentretien.php">Gérer les entretiens</a></li>
-											<li><a href="ajappart.php">Ajouter un appartement</a></li>
-											<li><a href="gesoption.php">Valider les options</a></li>
-											<li><a href="geslocation.php">Demande de location</a></li>
-										';
-									}
-                                ?>
                                 
 								
 								
@@ -112,7 +100,7 @@ echo 'Id de l utilisateur : ' .$_SESSION['idutil']. '';
 								<header>
                                     <?php
                                     echo'
-									<h2>Ajouter un appartement</h2>
+									<h2>Inscription</h2>
                                     ';
                                     ?>
 								</header>
@@ -126,14 +114,18 @@ echo 'Id de l utilisateur : ' .$_SESSION['idutil']. '';
                             echo'
                                     
                                 <section class="form">
-                                    Saisissez les informations :
-                                    <form method="post" action="ajappartTraite.php">
-										<label for="pseudo"> Prix : </label>
-                                        <input type="text" name="prix">
-                                        <label for="pseudo"> Surface : </label>
-                                        <input type="text" name="surface">
-										<label for="pseudo"> Nombre de pieces : </label>
-                                        <input type="text" name="nb">
+                                    Entrez vos informations :
+                                    <form method="post" action="inscriptionTraite.php">
+                                        <label for="pseudo"> UserName : </label>
+                                        <input type="text" name="username">
+                                        <label for="pseudo"> Mot de passe : </label>
+                                        <input type="text" name="mdp">
+										<label for="pseudo"> Nom : </label>
+                                        <input type="text" name="nom">
+										<label for="pseudo"> Prénom : </label>
+                                        <input type="text" name="prenom">
+										<label for="pseudo"> Date de naissance : (AAAA-MM-JJ)</label>
+                                        <input type="text" name="date">
                                         <input type="submit" value="Envoyer" />
                                     </form>
                                 </section>

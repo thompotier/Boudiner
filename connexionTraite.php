@@ -14,19 +14,23 @@ try
 	//Variables entrées dans le formulaire
 	$nom=$_POST["nom"];
 	$mdp=$_POST["mdp"];
-	$result = $dbh->prepare("SELECT * FROM Login WHERE Username= :nom AND Password= :mdp");
-	$result->execute(array('nom'=>$nom, 'mdp'=>$mdp));
+	$result = $dbh->prepare("SELECT * FROM Login WHERE Username= '$nom' AND Password= '$mdp'");
+	$result->execute();
+	
+	
 	
 	
 	$droit;
 	while ($row = $result->fetch()) {
 		$droit=$row[Droit];
+		$idutil=$row[ID_Utilisateur];
     	print_r($row);
-		echo "<br> <br> $droit";
+		echo "<br> <br> ";
   	}
 	
 	session_start ();
 	$_SESSION['nom'] = $nom;
+	$_SESSION['idutil']= $idutil;
 	
 	//Selon son droit on lui attribu son user sybase
 	switch ($droit) {
@@ -60,6 +64,7 @@ try
 	echo $_SESSION['usersybase'];
 	echo $_SESSION['mdpsybase'];
 	echo $_SESSION['nom'];
+	echo $_SESSION['idutil'];
 	
 	echo '<a href="index.php">Retour à la page accueil</a>';
 	

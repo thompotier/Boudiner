@@ -17,20 +17,23 @@ try
 	//Variables entrŽes dans le formulaire
 	$nom=$_POST["nom"];
 	$mdp=$_POST["mdp"];
+	$id = (int) $_SESSION['idutil'];
     
     //On prŽpare la requete de changement d'informations
-	$result = $dbh->prepare("SELECT * FROM Login WHERE Username= :nom AND Password= :mdp");
-	$result->execute(array('nom'=>$nom, 'mdp'=>$mdp));
+	$result = $dbh->prepare("EXEC ModifUtil $id, $nom, $mdp");
+    $result->execute();
     
 	//On sauvegarde ses nouvelles infos dans les var de session
     $_SESSION['nom']= $_POST["nom"];
 	
 	
-	
-	echo $_SESSION['droit'];
-	echo $_SESSION['usersybase'];
-	echo $_SESSION['mdpsybase'];
-	echo $_SESSION['nom'];
+	echo 'Id : '.$id;
+	echo '<br>Nouveau Nom : '.$nom;
+	echo '<br>Nouveau Mot de passe : '.$mdp;
+	echo '<br>Droit : '.$_SESSION['droit'];
+	echo '<br>Usersybase : '.$_SESSION['usersybase'];
+	echo '<br> MDPSybase : '.$_SESSION['mdpsybase'];
+	echo '<br>Var session nom : '.$_SESSION['nom'];
 	
 	echo '<a href="index.php">Retour ˆ la page accueil</a>';
 	

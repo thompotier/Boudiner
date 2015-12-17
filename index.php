@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE HTML>
 <!--
 	Future Imperfect by HTML5 UP
@@ -16,7 +19,6 @@
 	</head>
 	<body>
 <?php
-session_start();
 
 try
 {
@@ -33,13 +35,12 @@ try
 	VALUES (600, 600, 8)");*/
 	$result->execute();
     //var_dump($result);
-    
     debutEntete();
    	while ($row = $result->fetch()) {
-		afficherAppart($row[ID], $row[Nb_Pieces], $row[Surface], $row[CreatedOn]);
+		afficherAppart($row[ID], $row[Nb_Pieces], $row[Surface],$row[Prix], $row[CreatedOn]);
     	//echo($row);
 		//print_r($row);
-  	}
+  	}  	
 	finEntete();
 }
 catch(Exception $e)
@@ -63,7 +64,7 @@ catch(Exception $e)
 							<ul>
 								<li><a href="#">Accueil</a>';
 								//si le connceté est perseonnel
-								if (isset($_SESSION['droit']) && $_SESSION['droit']='3') {
+								if (isset($_SESSION['droit']) && $_SESSION['droit']=='3') {
 										echo'<li><a href="gesappart.php">Gérer appartement</a></li>
 											<li><a href="gesentretien.php">Gérer les entretiens</a></li>
 											<li><a href="ajappart.php">Ajouter un appartement</a></li>
@@ -122,6 +123,7 @@ catch(Exception $e)
 									}
 									else {
 										echo'<li><a href="connexion.php" class="button big fit">Connexion</a></li>';
+										echo'<li><a href="inscription.php" class="button big fit">Inscription</a></li>';
 									}
 								echo'		
 								</ul>
@@ -162,15 +164,25 @@ catch(Exception $e)
 		?>
 		
 						<?php
-						function afficherAppart($ID, $nb, $surface, $datecreation){
+						function afficherAppart($ID, $nb, $surface, $prix, $datecreation){
 							echo'
 							<article class="mini-post">
 											<header>
-												<h3><a href="#">Appartement '.$nb.' pieces de '.$surface.'m2</a></h3>
+												<h3><a href="#">Appartement '.$nb.' pieces de '.$surface.'m2 à '.$prix.' €</a></h3>
 												<time class="published" datetime="TEST">'.$datecreation.'</time>
 												<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-											</header>
-											<a href="#" class="image"><img src="images/appartement/'.$ID.'.jpg" alt="" /></a>
+											</header>';
+											
+											if (isset($_SESSION['droit']) && $_SESSION['droit']=='3') {
+												echo'<form method="post" action="">
+													<input type="submit" name="Modifier" value="Modifier" />
+												</form>
+												<form method="post" action="">
+													<input type="submit" name="Supprimer" value="Supprimer" />
+												</form>';
+											}
+											
+											echo'<a href="#" class="image"><img src="images/appartement/'.$ID.'.jpg" alt="" /></a>
 										</article>
 							
 							';
