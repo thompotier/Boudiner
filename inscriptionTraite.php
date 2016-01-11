@@ -18,8 +18,8 @@ try
 	$prenom=$_POST["prenom"];
 	$date=$_POST["date"];
     
-    //On prŽpare la requete de changement d'informations
-	$result = $dbh->prepare("EXEC Inscription $username2, $mdp, $nom, $prenom, $date");
+    //On prŽpare la requete
+	$result = $dbh->prepare("EXEC Inscription $username2, $mdp, $nom, $prenom, '$date'");
     $result->execute();
 	
 	echo 'a'.$username2;

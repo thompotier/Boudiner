@@ -125,7 +125,8 @@ session_start();
                             echo'
                                     
                                 <section class="form">
-                                    Changez vos informations :
+									Droit : '.$_SESSION['droit'].'
+                                    <br>Changez vos informations :
                                     <form method="post" action="profilTraite.php">
                                         <label for="pseudo"> Nom : </label>
                                         <input type="text" name="nom">

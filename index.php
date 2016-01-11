@@ -29,7 +29,7 @@ try
     $pw = "azerty";
     // On se connecte à MySQL
     $dbh = new PDO("dblib:host=$hostname:$port;dbname=$dbname","$username","$pw");
-    $result = $dbh->prepare("select * from Appartement");
+    $result = $dbh->prepare("select * from Appartement WHERE DeletedOn=null");
 	/*$result = $dbh->prepare("INSERT INTO Appartement
 	(Surface, Prix, Nb_Pieces)
 	VALUES (600, 600, 8)");*/
@@ -66,10 +66,14 @@ catch(Exception $e)
 								//si le connceté est perseonnel
 								if (isset($_SESSION['droit']) && $_SESSION['droit']=='3') {
 										echo'<li><a href="gesappart.php">Gérer appartement</a></li>
-											<li><a href="gesentretien.php">Gérer les entretiens</a></li>
 											<li><a href="ajappart.php">Ajouter un appartement</a></li>
-											<li><a href="gesoption.php">Valider les options</a></li>
-											<li><a href="geslocation.php">Demande de location</a></li>
+											<li><a href="gesoption.php">Gérer les options</a></li>
+										';
+									}
+								if (isset($_SESSION['droit']) && $_SESSION['droit']=='2') {
+										echo'<li><a href="gesappart.php">Mes Locations</a></li>
+											<li><a href="ajappart.php">Faire un préavis</a></li>
+											<li><a href="gesoption.php">Payer</a></li>
 										';
 									}
 								echo'</li>
@@ -174,12 +178,23 @@ catch(Exception $e)
 											</header>';
 											
 											if (isset($_SESSION['droit']) && $_SESSION['droit']=='3') {
-												echo'<form method="post" action="">
+												echo'<form method="post" action="modifierAppart.php">
+													<input type="hidden" name="idappart" value="'.$ID.'" />
 													<input type="submit" name="Modifier" value="Modifier" />
 												</form>
-												<form method="post" action="">
+												<form method="post" action="supprimerAppart.php">
+													<input type="hidden" name="idappart" value="'.$ID.'" />
 													<input type="submit" name="Supprimer" value="Supprimer" />
 												</form>';
+											}
+											
+											// Si le mec est connecté on lui affiche qu'il peut mettre une option
+											if (isset($_SESSION['droit']) && $_SESSION['droit']=='1') {
+												echo'<form method="post" action="optionAppart.php">
+													<input type="hidden" name="idappart" value="'.$ID.'" />
+													<input type="submit" name="option" value="Mettre option" />
+												</form>';
+												
 											}
 											
 											echo'<a href="#" class="image"><img src="images/appartement/'.$ID.'.jpg" alt="" /></a>

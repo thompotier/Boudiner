@@ -169,7 +169,18 @@ catch(Exception $e)
 										<article>
 											<header>
 												<h3><a href="#">Appartement '.$nb.' pieces de '.$surface.'m2</a></h3>
-												<time class="published" datetime="TEST">'.$datecreation.'</time>
+												<time class="published" datetime="TEST">'.$datecreation.'</time>';
+												if (isset($_SESSION['droit']) && $_SESSION['droit']=='3') {
+												echo'<form method="post" action="modifierAppart.php">
+													<input type="hidden" name="idappart" value="'.$ID.'" />
+													<input type="submit" name="Modifier" value="Modifier" />
+												</form>
+												<form method="post" action="supprimerAppart.php">
+													<input type="hidden" name="idappart" value="'.$ID.'" />
+													<input type="submit" name="Supprimer" value="Supprimer" />
+												</form>';
+											}
+											echo'
 											</header>
 											<a href="#" class="image"><img src="images/appartement/'.$ID.'.jpg" alt="" /></a>
 										</article>
